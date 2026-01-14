@@ -1,0 +1,26 @@
+{
+  "id": "api/operations/mutations/create-post",
+  "title": "createPost",
+  "description": "Create a new post",
+  "source": "@site/docs/api/operations/mutations/create-post.mdx",
+  "sourceDirName": "api/operations/mutations",
+  "slug": "/api/operations/mutations/create-post",
+  "permalink": "/docs/api/operations/mutations/create-post",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "create-post",
+    "title": "createPost"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "skip",
+    "permalink": "/docs/api/operations/directives/skip"
+  },
+  "next": {
+    "title": "createUser",
+    "permalink": "/docs/api/operations/mutations/create-user"
+  }
+}

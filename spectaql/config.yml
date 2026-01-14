@@ -1,0 +1,11 @@
+spectaql:
+  targetDir: ./public
+
+introspection:
+  schemaFile: ../schema.graphql
+
+info:
+  title: GraphQL API Docs (SpectaQL POC)
+  description: Minimal SpectaQL proof of concept.
+  version: 0.1.0
+  x-url: http://example.com/graphql

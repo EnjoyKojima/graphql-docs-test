@@ -1,0 +1,118 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "api/operations/directives/include",
+          "docs": [
+            {
+              "id": "api/api",
+              "path": "/docs/api/",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/directives/include",
+              "path": "/docs/api/operations/directives/include",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/directives/skip",
+              "path": "/docs/api/operations/directives/skip",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/mutations/create-post",
+              "path": "/docs/api/operations/mutations/create-post",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/mutations/create-user",
+              "path": "/docs/api/operations/mutations/create-user",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/queries/post",
+              "path": "/docs/api/operations/queries/post",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/queries/user",
+              "path": "/docs/api/operations/queries/user",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/operations/queries/users",
+              "path": "/docs/api/operations/queries/users",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/directives/deprecated",
+              "path": "/docs/api/types/directives/deprecated",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/directives/one-of",
+              "path": "/docs/api/types/directives/one-of",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/directives/specified-by",
+              "path": "/docs/api/types/directives/specified-by",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/inputs/create-post-input",
+              "path": "/docs/api/types/inputs/create-post-input",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/inputs/create-user-input",
+              "path": "/docs/api/types/inputs/create-user-input",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/objects/post",
+              "path": "/docs/api/types/objects/post",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/objects/user",
+              "path": "/docs/api/types/objects/user",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/scalars/boolean",
+              "path": "/docs/api/types/scalars/boolean",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/scalars/id",
+              "path": "/docs/api/types/scalars/id",
+              "sidebar": "docs"
+            },
+            {
+              "id": "api/types/scalars/string",
+              "path": "/docs/api/types/scalars/string",
+              "sidebar": "docs"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "docs": {
+              "link": {
+                "path": "/docs/api/operations/directives/include",
+                "label": "api/operations/directives/include"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

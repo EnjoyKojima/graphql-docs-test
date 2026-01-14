@@ -1,0 +1,26 @@
+{
+  "id": "api/operations/directives/skip",
+  "title": "skip",
+  "description": "Directs the executor to skip this field or fragment when the if argument is true.",
+  "source": "@site/docs/api/operations/directives/skip.mdx",
+  "sourceDirName": "api/operations/directives",
+  "slug": "/api/operations/directives/skip",
+  "permalink": "/docs/api/operations/directives/skip",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "skip",
+    "title": "skip"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "include",
+    "permalink": "/docs/api/operations/directives/include"
+  },
+  "next": {
+    "title": "createPost",
+    "permalink": "/docs/api/operations/mutations/create-post"
+  }
+}

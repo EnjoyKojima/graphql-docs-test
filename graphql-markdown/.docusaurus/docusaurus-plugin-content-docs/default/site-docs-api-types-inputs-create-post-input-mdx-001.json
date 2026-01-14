@@ -1,0 +1,26 @@
+{
+  "id": "api/types/inputs/create-post-input",
+  "title": "CreatePostInput",
+  "description": "No description",
+  "source": "@site/docs/api/types/inputs/create-post-input.mdx",
+  "sourceDirName": "api/types/inputs",
+  "slug": "/api/types/inputs/create-post-input",
+  "permalink": "/docs/api/types/inputs/create-post-input",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "create-post-input",
+    "title": "CreatePostInput"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "specifiedBy",
+    "permalink": "/docs/api/types/directives/specified-by"
+  },
+  "next": {
+    "title": "CreateUserInput",
+    "permalink": "/docs/api/types/inputs/create-user-input"
+  }
+}

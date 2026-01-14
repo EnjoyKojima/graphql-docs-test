@@ -1,0 +1,26 @@
+{
+  "id": "api/types/inputs/create-user-input",
+  "title": "CreateUserInput",
+  "description": "No description",
+  "source": "@site/docs/api/types/inputs/create-user-input.mdx",
+  "sourceDirName": "api/types/inputs",
+  "slug": "/api/types/inputs/create-user-input",
+  "permalink": "/docs/api/types/inputs/create-user-input",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "create-user-input",
+    "title": "CreateUserInput"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "CreatePostInput",
+    "permalink": "/docs/api/types/inputs/create-post-input"
+  },
+  "next": {
+    "title": "Post",
+    "permalink": "/docs/api/types/objects/post"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "api/operations/queries/user",
+  "title": "user",
+  "description": "Get a user by ID",
+  "source": "@site/docs/api/operations/queries/user.mdx",
+  "sourceDirName": "api/operations/queries",
+  "slug": "/api/operations/queries/user",
+  "permalink": "/docs/api/operations/queries/user",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "user",
+    "title": "user"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "post",
+    "permalink": "/docs/api/operations/queries/post"
+  },
+  "next": {
+    "title": "users",
+    "permalink": "/docs/api/operations/queries/users"
+  }
+}

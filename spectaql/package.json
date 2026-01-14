@@ -1,0 +1,12 @@
+{
+  "name": "spectaql-poc",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "npx spectaql config.yml",
+    "dev": "npx spectaql -D -p 3003 config.yml"
+  },
+  "devDependencies": {
+    "spectaql": "^3.0.6"
+  }
+}

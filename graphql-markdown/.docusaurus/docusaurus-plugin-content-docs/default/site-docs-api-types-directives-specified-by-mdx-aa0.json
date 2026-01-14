@@ -1,0 +1,26 @@
+{
+  "id": "api/types/directives/specified-by",
+  "title": "specifiedBy",
+  "description": "Exposes a URL that specifies the behavior of this scalar.",
+  "source": "@site/docs/api/types/directives/specified-by.mdx",
+  "sourceDirName": "api/types/directives",
+  "slug": "/api/types/directives/specified-by",
+  "permalink": "/docs/api/types/directives/specified-by",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "specified-by",
+    "title": "specifiedBy"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "oneOf",
+    "permalink": "/docs/api/types/directives/one-of"
+  },
+  "next": {
+    "title": "CreatePostInput",
+    "permalink": "/docs/api/types/inputs/create-post-input"
+  }
+}

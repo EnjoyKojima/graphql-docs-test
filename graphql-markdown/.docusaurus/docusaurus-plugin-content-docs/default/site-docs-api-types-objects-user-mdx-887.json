@@ -1,0 +1,26 @@
+{
+  "id": "api/types/objects/user",
+  "title": "User",
+  "description": "User type representing a registered user",
+  "source": "@site/docs/api/types/objects/user.mdx",
+  "sourceDirName": "api/types/objects",
+  "slug": "/api/types/objects/user",
+  "permalink": "/docs/api/types/objects/user",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "user",
+    "title": "User"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Post",
+    "permalink": "/docs/api/types/objects/post"
+  },
+  "next": {
+    "title": "Boolean",
+    "permalink": "/docs/api/types/scalars/boolean"
+  }
+}

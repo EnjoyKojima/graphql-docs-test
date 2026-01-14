@@ -1,0 +1,26 @@
+{
+  "id": "api/types/scalars/string",
+  "title": "String",
+  "description": "The String scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+  "source": "@site/docs/api/types/scalars/string.mdx",
+  "sourceDirName": "api/types/scalars",
+  "slug": "/api/types/scalars/string",
+  "permalink": "/docs/api/types/scalars/string",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "string",
+    "title": "String"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "ID",
+    "permalink": "/docs/api/types/scalars/id"
+  },
+  "next": {
+    "title": "GraphQL API Documentation",
+    "permalink": "/docs/api/"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "magidoc-poc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "generate": "magidoc generate",
+    "preview": "magidoc preview",
+    "dev": "magidoc preview --port 3002"
+  },
+  "devDependencies": {
+    "@magidoc/cli": "^6.0.0"
+  }
+}

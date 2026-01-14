@@ -1,0 +1,26 @@
+{
+  "id": "api/operations/queries/post",
+  "title": "post",
+  "description": "Get a post by ID",
+  "source": "@site/docs/api/operations/queries/post.mdx",
+  "sourceDirName": "api/operations/queries",
+  "slug": "/api/operations/queries/post",
+  "permalink": "/docs/api/operations/queries/post",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "post",
+    "title": "post"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "createUser",
+    "permalink": "/docs/api/operations/mutations/create-user"
+  },
+  "next": {
+    "title": "user",
+    "permalink": "/docs/api/operations/queries/user"
+  }
+}

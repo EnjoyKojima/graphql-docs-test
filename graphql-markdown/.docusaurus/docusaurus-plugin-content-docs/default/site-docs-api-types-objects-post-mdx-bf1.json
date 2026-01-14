@@ -1,0 +1,26 @@
+{
+  "id": "api/types/objects/post",
+  "title": "Post",
+  "description": "Post type representing a blog post",
+  "source": "@site/docs/api/types/objects/post.mdx",
+  "sourceDirName": "api/types/objects",
+  "slug": "/api/types/objects/post",
+  "permalink": "/docs/api/types/objects/post",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "post",
+    "title": "Post"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "CreateUserInput",
+    "permalink": "/docs/api/types/inputs/create-user-input"
+  },
+  "next": {
+    "title": "User",
+    "permalink": "/docs/api/types/objects/user"
+  }
+}

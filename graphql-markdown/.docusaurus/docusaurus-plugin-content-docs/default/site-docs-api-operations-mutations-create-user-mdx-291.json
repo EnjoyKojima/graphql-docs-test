@@ -1,0 +1,26 @@
+{
+  "id": "api/operations/mutations/create-user",
+  "title": "createUser",
+  "description": "Create a new user",
+  "source": "@site/docs/api/operations/mutations/create-user.mdx",
+  "sourceDirName": "api/operations/mutations",
+  "slug": "/api/operations/mutations/create-user",
+  "permalink": "/docs/api/operations/mutations/create-user",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "create-user",
+    "title": "createUser"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "createPost",
+    "permalink": "/docs/api/operations/mutations/create-post"
+  },
+  "next": {
+    "title": "post",
+    "permalink": "/docs/api/operations/queries/post"
+  }
+}
