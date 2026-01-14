@@ -1,0 +1,9 @@
+schema: ./schema/schema.graphql
+documents: null
+extensions:
+  graphql-markdown:
+    rootPath: ./docs
+    baseURL: graphql
+    linkRoot: /docs
+    loaders:
+      GraphQLFileLoader: '@graphql-tools/graphql-file-loader'
