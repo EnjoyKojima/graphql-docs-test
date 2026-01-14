@@ -1,0 +1,81 @@
+---
+id: create-post-input
+title: CreatePostInput
+---
+
+
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+Input for creating a new post
+
+
+```graphql
+input CreatePostInput {
+  title: String!
+  content: String!
+  authorId: ID!
+  tags: [String!]
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePostInput.<b>title</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Post title
+
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePostInput.<b>content</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Post content in Markdown format
+
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePostInput.<b>authorId</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Author's user ID
+
+
+#### [<code style={{ fontWeight: 'normal' }}>CreatePostInput.<b>tags</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[String!]</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary " text="list"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Tags to associate with the post
+
+
+
+
+
+
+### Member Of
+
+[`createPost`](/docs/graphql/operations/mutations/create-post.mdx)  <Badge class="badge badge--secondary badge--relation" text="mutation"/>

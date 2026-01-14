@@ -1,0 +1,105 @@
+---
+id: post
+title: Post
+---
+
+
+
+
+export const Bullet = () => <><span style={{ fontWeight: 'normal', fontSize: '.5em', color: 'var(--ifm-color-secondary-darkest)' }}>&nbsp;●&nbsp;</span></>
+
+export const SpecifiedBy = (props) => <>Specification<a className="link" style={{ fontSize:'1.5em', paddingLeft:'4px' }} target="_blank" href={props.url} title={'Specified by ' + props.url}>⎘</a></>
+
+export const Badge = (props) => <><span className={props.class}>{props.text}</span></>
+
+import { useState } from 'react';
+
+export const Details = ({ dataOpen, dataClose, children, startOpen = false }) => {
+  const [open, setOpen] = useState(startOpen);
+  return (
+    <details {...(open ? { open: true } : {})} className="details" style={{ border:'none', boxShadow:'none', background:'var(--ifm-background-color)' }}>
+      <summary
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((open) => !open);
+        }}
+        style={{ listStyle:'none' }}
+      >
+      {open ? dataOpen : dataClose}
+      </summary>
+      {open && children}
+    </details>
+  );
+};
+
+
+
+
+
+
+
+
+A blog post
+
+
+```graphql
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  published: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  tags: [String!]!
+}
+```
+
+
+
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>id</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>ID!</b></code>](/docs/graphql/types/scalars/id.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Unique identifier for the post
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>title</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Post title
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>content</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Post content in Markdown format
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>author</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>User!</b></code>](/docs/graphql/types/objects/user.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="object"/> 
+Author of the post
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>published</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>Boolean!</b></code>](/docs/graphql/types/scalars/boolean.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Post publication status
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>createdAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Date when the post was created
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>updatedAt</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>String!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Date when the post was last updated
+
+
+#### [<code style={{ fontWeight: 'normal' }}>Post.<b>tags</b></code>](#)<Bullet />[<code style={{ fontWeight: 'normal' }}><b>[String!]!</b></code>](/docs/graphql/types/scalars/string.mdx) <Badge class="badge badge--secondary badge--non_null" text="non-null"/> <Badge class="badge badge--secondary " text="scalar"/> 
+Tags associated with the post
+
+
+
+
+
+
+### Returned By
+
+[`createPost`](/docs/graphql/operations/mutations/create-post.mdx)  <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`post`](/docs/graphql/operations/queries/post.mdx)  <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`posts`](/docs/graphql/operations/queries/posts.mdx)  <Badge class="badge badge--secondary badge--relation" text="query"/><Bullet />[`publishPost`](/docs/graphql/operations/mutations/publish-post.mdx)  <Badge class="badge badge--secondary badge--relation" text="mutation"/><Bullet />[`updatePost`](/docs/graphql/operations/mutations/update-post.mdx)  <Badge class="badge badge--secondary badge--relation" text="mutation"/>
+
+### Member Of
+
+[`User`](/docs/graphql/types/objects/user.mdx)  <Badge class="badge badge--secondary badge--relation" text="object"/>
