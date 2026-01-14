@@ -1,0 +1,109 @@
+"""
+ユーザー情報を表す型
+"""
+type User {
+  """
+  ユーザーID
+  """
+  id: ID!
+  
+  """
+  ユーザー名
+  """
+  name: String!
+  
+  """
+  メールアドレス
+  """
+  email: String!
+  
+  """
+  年齢
+  """
+  age: Int
+  
+  """
+  投稿一覧
+  """
+  posts: [Post!]!
+}
+
+"""
+投稿情報を表す型
+"""
+type Post {
+  """
+  投稿ID
+  """
+  id: ID!
+  
+  """
+  タイトル
+  """
+  title: String!
+  
+  """
+  本文
+  """
+  content: String!
+  
+  """
+  公開日時
+  """
+  publishedAt: String
+  
+  """
+  投稿者
+  """
+  author: User!
+}
+
+"""
+クエリのルート型
+"""
+type Query {
+  """
+  全ユーザーを取得
+  """
+  users: [User!]!
+  
+  """
+  IDでユーザーを取得
+  """
+  user(id: ID!): User
+  
+  """
+  全投稿を取得
+  """
+  posts: [Post!]!
+  
+  """
+  IDで投稿を取得
+  """
+  post(id: ID!): Post
+}
+
+"""
+ミューテーションのルート型
+"""
+type Mutation {
+  """
+  ユーザーを作成
+  """
+  createUser(name: String!, email: String!, age: Int): User!
+  
+  """
+  投稿を作成
+  """
+  createPost(title: String!, content: String!, authorId: ID!): Post!
+  
+  """
+  ユーザーを更新
+  """
+  updateUser(id: ID!, name: String, email: String, age: Int): User
+  
+  """
+  投稿を削除
+  """
+  deletePost(id: ID!): Boolean!
+}
