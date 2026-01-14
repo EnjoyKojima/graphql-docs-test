@@ -1,0 +1,261 @@
+"""
+GraphQL API for a sample application
+"""
+type Query {
+  """
+  Get a user by ID
+  """
+  user(id: ID!): User
+  
+  """
+  Get all users
+  """
+  users(
+    """
+    Limit the number of results
+    """
+    limit: Int = 10
+    
+    """
+    Offset for pagination
+    """
+    offset: Int = 0
+  ): [User!]!
+  
+  """
+  Get a post by ID
+  """
+  post(id: ID!): Post
+  
+  """
+  Get all posts
+  """
+  posts(
+    """
+    Filter posts by author ID
+    """
+    authorId: ID
+    
+    """
+    Limit the number of results
+    """
+    limit: Int = 10
+  ): [Post!]!
+}
+
+type Mutation {
+  """
+  Create a new user
+  """
+  createUser(input: CreateUserInput!): User!
+  
+  """
+  Update an existing user
+  """
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+  
+  """
+  Delete a user
+  """
+  deleteUser(id: ID!): Boolean!
+  
+  """
+  Create a new post
+  """
+  createPost(input: CreatePostInput!): Post!
+}
+
+"""
+A user in the system
+"""
+type User {
+  """
+  Unique identifier for the user
+  """
+  id: ID!
+  
+  """
+  The user's email address
+  """
+  email: String!
+  
+  """
+  The user's display name
+  """
+  name: String!
+  
+  """
+  The user's profile bio
+  """
+  bio: String
+  
+  """
+  User role in the system
+  """
+  role: UserRole!
+  
+  """
+  Posts authored by this user
+  """
+  posts: [Post!]!
+  
+  """
+  Timestamp when the user was created
+  """
+  createdAt: DateTime!
+  
+  """
+  Timestamp when the user was last updated
+  """
+  updatedAt: DateTime!
+}
+
+"""
+A blog post
+"""
+type Post {
+  """
+  Unique identifier for the post
+  """
+  id: ID!
+  
+  """
+  The post title
+  """
+  title: String!
+  
+  """
+  The post content
+  """
+  content: String!
+  
+  """
+  Whether the post is published
+  """
+  published: Boolean!
+  
+  """
+  The author of the post
+  """
+  author: User!
+  
+  """
+  Tags associated with the post
+  """
+  tags: [String!]!
+  
+  """
+  Timestamp when the post was created
+  """
+  createdAt: DateTime!
+  
+  """
+  Timestamp when the post was published
+  """
+  publishedAt: DateTime
+}
+
+"""
+User role enumeration
+"""
+enum UserRole {
+  """
+  Administrator with full access
+  """
+  ADMIN
+  
+  """
+  Regular user with standard access
+  """
+  USER
+  
+  """
+  Guest user with limited access
+  """
+  GUEST
+}
+
+"""
+Input for creating a new user
+"""
+input CreateUserInput {
+  """
+  The user's email address
+  """
+  email: String!
+  
+  """
+  The user's display name
+  """
+  name: String!
+  
+  """
+  Optional bio for the user
+  """
+  bio: String
+  
+  """
+  User role (defaults to USER)
+  """
+  role: UserRole = USER
+}
+
+"""
+Input for updating an existing user
+"""
+input UpdateUserInput {
+  """
+  Updated email address
+  """
+  email: String
+  
+  """
+  Updated display name
+  """
+  name: String
+  
+  """
+  Updated bio
+  """
+  bio: String
+  
+  """
+  Updated role
+  """
+  role: UserRole
+}
+
+"""
+Input for creating a new post
+"""
+input CreatePostInput {
+  """
+  The post title
+  """
+  title: String!
+  
+  """
+  The post content
+  """
+  content: String!
+  
+  """
+  Whether to publish immediately
+  """
+  published: Boolean = false
+  
+  """
+  ID of the post author
+  """
+  authorId: ID!
+  
+  """
+  Tags for the post
+  """
+  tags: [String!] = []
+}
+
+"""
+A custom scalar representing a date and time
+"""
+scalar DateTime

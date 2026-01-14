@@ -1,0 +1,17 @@
+{
+  "name": "graphql-docs-test",
+  "version": "1.0.0",
+  "description": "GraphQLのドキュメントを生成するnpmパッケージを試すリポジトリです。",
+  "main": "index.js",
+  "scripts": {
+    "docs:spectaql:preview": "spectaql -D spectaql.yaml",
+    "docs:spectaql:build": "spectaql spectaql.yaml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "spectaql": "^3.0.6"
+  }
+}
