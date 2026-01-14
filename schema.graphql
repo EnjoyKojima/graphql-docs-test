@@ -1,5 +1,5 @@
 """
-Sample GraphQL Schema for POC
+Sample GraphQL Schema for POC - Extended Version
 """
 
 type Query {
@@ -9,14 +9,49 @@ type Query {
   user(id: ID!): User
 
   """
-  Get all users
+  Get all users with optional filtering
   """
-  users: [User!]!
+  users(filter: UserFilter, pagination: PaginationInput): UserConnection!
 
   """
   Get a post by ID
   """
   post(id: ID!): Post
+
+  """
+  Get all posts with optional filtering and sorting
+  """
+  posts(filter: PostFilter, sort: PostSortInput, pagination: PaginationInput): PostConnection!
+
+  """
+  Get a comment by ID
+  """
+  comment(id: ID!): Comment
+
+  """
+  Get a category by ID or slug
+  """
+  category(id: ID, slug: String): Category
+
+  """
+  Get all categories
+  """
+  categories: [Category!]!
+
+  """
+  Get all tags
+  """
+  tags: [Tag!]!
+
+  """
+  Search across all content types
+  """
+  search(query: String!, types: [SearchableType!]): SearchResult!
+
+  """
+  Get analytics data for a specific entity
+  """
+  analytics(entityId: ID!, entityType: AnalyticsEntityType!, period: AnalyticsPeriod!): AnalyticsData
 }
 
 type Mutation {
@@ -26,40 +61,694 @@ type Mutation {
   createUser(input: CreateUserInput!): User!
 
   """
+  Update an existing user
+  """
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+
+  """
+  Delete a user
+  """
+  deleteUser(id: ID!): DeleteResult!
+
+  """
   Create a new post
   """
   createPost(input: CreatePostInput!): Post!
+
+  """
+  Update an existing post
+  """
+  updatePost(id: ID!, input: UpdatePostInput!): Post!
+
+  """
+  Delete a post
+  """
+  deletePost(id: ID!): DeleteResult!
+
+  """
+  Publish a draft post
+  """
+  publishPost(id: ID!, scheduledAt: String): Post!
+
+  """
+  Create a new comment
+  """
+  createComment(input: CreateCommentInput!): Comment!
+
+  """
+  Update a comment
+  """
+  updateComment(id: ID!, content: String!): Comment!
+
+  """
+  Delete a comment
+  """
+  deleteComment(id: ID!): DeleteResult!
+
+  """
+  Create a new category
+  """
+  createCategory(input: CreateCategoryInput!): Category!
+
+  """
+  Update a category
+  """
+  updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
+
+  """
+  Create a new tag
+  """
+  createTag(name: String!): Tag!
+
+  """
+  Add tags to a post
+  """
+  addTagsToPost(postId: ID!, tagIds: [ID!]!): Post!
+
+  """
+  Remove tags from a post
+  """
+  removeTagsFromPost(postId: ID!, tagIds: [ID!]!): Post!
+
+  """
+  Follow a user
+  """
+  followUser(userId: ID!): FollowResult!
+
+  """
+  Unfollow a user
+  """
+  unfollowUser(userId: ID!): FollowResult!
+
+  """
+  Like a content item
+  """
+  likeContent(contentId: ID!, contentType: LikeableType!): LikeResult!
+
+  """
+  Unlike a content item
+  """
+  unlikeContent(contentId: ID!, contentType: LikeableType!): LikeResult!
 }
+
+type Subscription {
+  """
+  Subscribe to new posts
+  """
+  postCreated(authorId: ID): Post!
+
+  """
+  Subscribe to new comments on a post
+  """
+  commentAdded(postId: ID!): Comment!
+
+  """
+  Subscribe to user activity
+  """
+  userActivity(userId: ID!): ActivityEvent!
+}
+
+# ============================================
+# Interfaces
+# ============================================
+
+"""
+Base interface for all timestamped entities
+"""
+interface Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+Interface for content that can be liked
+"""
+interface Likeable {
+  id: ID!
+  likeCount: Int!
+  likedByCurrentUser: Boolean!
+}
+
+"""
+Interface for content that can be commented on
+"""
+interface Commentable {
+  id: ID!
+  comments(pagination: PaginationInput): CommentConnection!
+  commentCount: Int!
+}
+
+# ============================================
+# Types
+# ============================================
 
 """
 User type representing a registered user
 """
-type User {
+type User implements Node {
   id: ID!
   name: String!
   email: String!
-  posts: [Post!]!
-  createdAt: String!
+  username: String!
+  bio: String
+  avatarUrl: String
+  role: UserRole!
+  status: UserStatus!
+  posts(filter: PostFilter, pagination: PaginationInput): PostConnection!
+  comments(pagination: PaginationInput): CommentConnection!
+  followers(pagination: PaginationInput): UserConnection!
+  following(pagination: PaginationInput): UserConnection!
+  followerCount: Int!
+  followingCount: Int!
+  isFollowedByCurrentUser: Boolean!
+  settings: UserSettings!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+User settings and preferences
+"""
+type UserSettings {
+  emailNotifications: Boolean!
+  pushNotifications: Boolean!
+  privateProfile: Boolean!
+  theme: Theme!
+  language: String!
 }
 
 """
 Post type representing a blog post
 """
-type Post {
+type Post implements Node & Likeable & Commentable {
   id: ID!
   title: String!
+  slug: String!
+  excerpt: String
+  content: String!
+  contentFormat: ContentFormat!
+  featuredImage: Image
+  author: User!
+  category: Category
+  tags: [Tag!]!
+  status: PostStatus!
+  visibility: Visibility!
+  comments(pagination: PaginationInput): CommentConnection!
+  commentCount: Int!
+  likeCount: Int!
+  likedByCurrentUser: Boolean!
+  viewCount: Int!
+  readingTime: Int!
+  seoMetadata: SEOMetadata
+  publishedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+Comment type for post comments
+"""
+type Comment implements Node & Likeable {
+  id: ID!
   content: String!
   author: User!
-  createdAt: String!
+  post: Post!
+  parentComment: Comment
+  replies(pagination: PaginationInput): CommentConnection!
+  replyCount: Int!
+  likeCount: Int!
+  likedByCurrentUser: Boolean!
+  status: CommentStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
+
+"""
+Category for organizing posts
+"""
+type Category implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  parentCategory: Category
+  childCategories: [Category!]!
+  posts(pagination: PaginationInput): PostConnection!
+  postCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+Tag for labeling posts
+"""
+type Tag implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  posts(pagination: PaginationInput): PostConnection!
+  postCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+Image type for media
+"""
+type Image {
+  id: ID!
+  url: String!
+  altText: String
+  width: Int!
+  height: Int!
+  format: ImageFormat!
+  size: Int!
+}
+
+"""
+SEO metadata for posts
+"""
+type SEOMetadata {
+  title: String
+  description: String
+  keywords: [String!]
+  canonicalUrl: String
+  ogImage: Image
+}
+
+"""
+Analytics data for entities
+"""
+type AnalyticsData {
+  entityId: ID!
+  entityType: AnalyticsEntityType!
+  period: AnalyticsPeriod!
+  views: Int!
+  uniqueVisitors: Int!
+  avgTimeOnPage: Float!
+  bounceRate: Float!
+  dailyBreakdown: [DailyAnalytics!]!
+}
+
+"""
+Daily analytics breakdown
+"""
+type DailyAnalytics {
+  date: DateTime!
+  views: Int!
+  uniqueVisitors: Int!
+}
+
+"""
+Activity event for subscriptions
+"""
+type ActivityEvent {
+  id: ID!
+  type: ActivityType!
+  actor: User!
+  target: ActivityTarget!
+  createdAt: DateTime!
+}
+
+"""
+Union type for activity targets
+"""
+union ActivityTarget = Post | Comment | User
+
+"""
+Search result container
+"""
+type SearchResult {
+  items: [SearchResultItem!]!
+  totalCount: Int!
+  query: String!
+}
+
+"""
+Union type for search result items
+"""
+union SearchResultItem = Post | User | Comment | Category | Tag
+
+# ============================================
+# Connections (Pagination)
+# ============================================
+
+"""
+Paginated user connection
+"""
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+"""
+Paginated post connection
+"""
+type PostConnection {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PostEdge {
+  node: Post!
+  cursor: String!
+}
+
+"""
+Paginated comment connection
+"""
+type CommentConnection {
+  edges: [CommentEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+"""
+Page info for cursor-based pagination
+"""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ============================================
+# Result Types
+# ============================================
+
+"""
+Result of a delete operation
+"""
+type DeleteResult {
+  success: Boolean!
+  message: String
+  deletedId: ID
+}
+
+"""
+Result of a follow operation
+"""
+type FollowResult {
+  success: Boolean!
+  user: User
+  isFollowing: Boolean!
+}
+
+"""
+Result of a like operation
+"""
+type LikeResult {
+  success: Boolean!
+  likeCount: Int!
+  isLiked: Boolean!
+}
+
+# ============================================
+# Enums
+# ============================================
+
+"""
+User roles in the system
+"""
+enum UserRole {
+  ADMIN
+  MODERATOR
+  AUTHOR
+  SUBSCRIBER
+}
+
+"""
+User account status
+"""
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+"""
+Post publication status
+"""
+enum PostStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+"""
+Content visibility levels
+"""
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  UNLISTED
+  FOLLOWERS_ONLY
+}
+
+"""
+Comment moderation status
+"""
+enum CommentStatus {
+  PENDING
+  APPROVED
+  SPAM
+  DELETED
+}
+
+"""
+Content format types
+"""
+enum ContentFormat {
+  MARKDOWN
+  HTML
+  PLAIN_TEXT
+}
+
+"""
+Image format types
+"""
+enum ImageFormat {
+  JPEG
+  PNG
+  GIF
+  WEBP
+  SVG
+}
+
+"""
+UI theme options
+"""
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
+"""
+Sortable fields for posts
+"""
+enum PostSortField {
+  CREATED_AT
+  UPDATED_AT
+  PUBLISHED_AT
+  TITLE
+  VIEW_COUNT
+  LIKE_COUNT
+  COMMENT_COUNT
+}
+
+"""
+Sort direction
+"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""
+Searchable content types
+"""
+enum SearchableType {
+  POST
+  USER
+  COMMENT
+  CATEGORY
+  TAG
+}
+
+"""
+Entity types for analytics
+"""
+enum AnalyticsEntityType {
+  POST
+  USER
+  CATEGORY
+}
+
+"""
+Analytics time periods
+"""
+enum AnalyticsPeriod {
+  DAY
+  WEEK
+  MONTH
+  YEAR
+  ALL_TIME
+}
+
+"""
+Activity event types
+"""
+enum ActivityType {
+  POST_CREATED
+  POST_PUBLISHED
+  POST_LIKED
+  COMMENT_CREATED
+  USER_FOLLOWED
+}
+
+"""
+Types that can be liked
+"""
+enum LikeableType {
+  POST
+  COMMENT
+}
+
+# ============================================
+# Input Types
+# ============================================
 
 input CreateUserInput {
   name: String!
   email: String!
+  username: String!
+  password: String!
+  bio: String
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  username: String
+  bio: String
+  avatarUrl: String
+  settings: UserSettingsInput
+}
+
+input UserSettingsInput {
+  emailNotifications: Boolean
+  pushNotifications: Boolean
+  privateProfile: Boolean
+  theme: Theme
+  language: String
 }
 
 input CreatePostInput {
   title: String!
   content: String!
+  contentFormat: ContentFormat = MARKDOWN
+  excerpt: String
   authorId: ID!
+  categoryId: ID
+  tagIds: [ID!]
+  status: PostStatus = DRAFT
+  visibility: Visibility = PUBLIC
+  featuredImageId: ID
+  seoMetadata: SEOMetadataInput
 }
+
+input UpdatePostInput {
+  title: String
+  content: String
+  contentFormat: ContentFormat
+  excerpt: String
+  categoryId: ID
+  tagIds: [ID!]
+  status: PostStatus
+  visibility: Visibility
+  featuredImageId: ID
+  seoMetadata: SEOMetadataInput
+}
+
+input SEOMetadataInput {
+  title: String
+  description: String
+  keywords: [String!]
+  canonicalUrl: String
+  ogImageId: ID
+}
+
+input CreateCommentInput {
+  content: String!
+  postId: ID!
+  parentCommentId: ID
+}
+
+input CreateCategoryInput {
+  name: String!
+  slug: String
+  description: String
+  parentCategoryId: ID
+}
+
+input UpdateCategoryInput {
+  name: String
+  slug: String
+  description: String
+  parentCategoryId: ID
+}
+
+input UserFilter {
+  role: UserRole
+  status: UserStatus
+  search: String
+}
+
+input PostFilter {
+  status: PostStatus
+  visibility: Visibility
+  authorId: ID
+  categoryId: ID
+  tagIds: [ID!]
+  search: String
+  publishedAfter: DateTime
+  publishedBefore: DateTime
+}
+
+input PostSortInput {
+  field: PostSortField!
+  direction: SortDirection = DESC
+}
+
+input PaginationInput {
+  first: Int
+  after: String
+  last: Int
+  before: String
+}
+
+# ============================================
+# Custom Scalars
+# ============================================
+
+"""
+ISO 8601 formatted date-time string
+"""
+scalar DateTime
